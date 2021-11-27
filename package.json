@@ -4,6 +4,13 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "nodemonConfig": {
+    "ignore": [
+      "test/*",
+      "docs/*",
+      "db/*"
+    ]
+  },
   "scripts": {
     "start": "node index.js",
     "start:dev": "nodemon index.js",
