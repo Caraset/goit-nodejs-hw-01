@@ -3,16 +3,14 @@ import {
   getContactById,
   removeContact,
   addContact,
-} from './contacts.js';
+} from "./contacts.js";
 
 // const contacts = await listContacts();
 // console.log(contacts);
 
 // console.log(await getContactById(6));
 // removeContact(11);
-addContact('Valerii Mango', 'asdf@asd.com', '(126) 458-4865');
-
-// listContacts();
+addContact("Valerii Mango", "asdf@asd.com", "(126) 458-4865");
 
 // {
 //   id: 6,
