@@ -5,16 +5,59 @@ import {
   addContact,
 } from "./contacts.js";
 
-// const contacts = await listContacts();
-// console.log(contacts);
+import { Command } from "commander/esm.mjs";
+const program = new Command();
 
-// console.log(await getContactById(6));
-// removeContact(11);
-addContact("Valerii Mango", "asdf@asd.com", "(126) 458-4865");
+program
+  .option("-a, --action <type>", "choose action")
+  .option("-i, --id <type>", "user id")
+  .option("-n, --name <type>", "user name")
+  .option("-e, --email <type>", "user email")
+  .option("-p, --phone <type>", "user phone");
 
-// {
-//   id: 6,
-//   name: 'Abbot Franks',
-//   email: 'scelerisque@magnis.org',
-//   phone: '(186) 568-3720'
-// }
+program.parse(process.argv);
+
+const argv = program.opts();
+
+// TODO: рефакторить
+function invokeAction({ action, id, name, email, phone }) {
+  switch (action) {
+    case "list":
+      // ...
+      listContacts().then((r) => console.table(r));
+      break;
+
+    case "get":
+      // ... id
+      getContactById(Number(id)).then((r) => console.log(r));
+      break;
+
+    case "add":
+      // ... name email phone
+
+      switch (undefined) {
+        case name:
+          console.warn("Name required");
+          return;
+        case email:
+          console.warn("Email required");
+          return;
+        case phone:
+          console.warn("Phone required");
+          return;
+      }
+
+      addContact(name, email, phone);
+      break;
+
+    case "remove":
+      // ... id
+      removeContact(Number(id));
+      break;
+
+    default:
+      console.warn("\x1B[31m Unknown action type!");
+  }
+}
+
+invokeAction(argv);
